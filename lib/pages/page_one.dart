@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:status/common/constants.dart';
+import 'package:status/services/user_service.dart';
 
 class PageOne extends StatelessWidget {
 
@@ -9,7 +10,7 @@ class PageOne extends StatelessWidget {
       appBar: AppBar(
         title: Text('Pagina 1'),
       ),
-      body: UserInformation(),
+      body: userService.isUserExists ? UserInformation() : Center(child: Text('No hay usuario'),),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.accessibility_new),
         onPressed: () => Navigator.pushNamed(context, Constants.pageTwoRouteName),

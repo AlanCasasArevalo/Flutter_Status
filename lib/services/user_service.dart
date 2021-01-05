@@ -7,6 +7,10 @@ class _UserService {
   void setUser (User user) {
     this._user = user;
   }
+
+  void setUserAge(int age) {
+    this._user.age = age;
+  }
 }
 
 final userService = new _UserService();

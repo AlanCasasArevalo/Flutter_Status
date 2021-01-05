@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:status/common/constants.dart';
+import 'package:status/models/user.dart';
 import 'package:status/services/user_service.dart';
 
 class PageOne extends StatelessWidget {
@@ -10,7 +11,7 @@ class PageOne extends StatelessWidget {
       appBar: AppBar(
         title: Text('Pagina 1'),
       ),
-      body: userService.isUserExists ? UserInformation() : Center(child: Text('No hay usuario'),),
+      body: userService.isUserExists ? UserInformation(userService.user) : Center(child: Text('No hay usuario'),),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.accessibility_new),
         onPressed: () => Navigator.pushNamed(context, Constants.pageTwoRouteName),
@@ -20,6 +21,11 @@ class PageOne extends StatelessWidget {
 }
 
 class UserInformation extends StatelessWidget {
+
+  final User user;
+
+  const UserInformation( this.user );
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,8 +37,8 @@ class UserInformation extends StatelessWidget {
         children: [
           Text('General', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
           Divider(),
-          ListTile(title: Text('Nombre: '),),
-          ListTile(title: Text('Edad: '),),
+          ListTile(title: Text('Nombre: ${this.user.name}'),),
+          ListTile(title: Text('Edad: ${this.user.age}'),),
           Text('Profesiones', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
           Divider(),
           ListTile(title: Text('Profesion 1'),),

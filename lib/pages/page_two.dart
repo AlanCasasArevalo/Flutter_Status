@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:status/models/user.dart';
+import 'package:status/services/user_service.dart';
 
 class PageTwo extends StatelessWidget {
   @override
@@ -14,17 +16,26 @@ class PageTwo extends StatelessWidget {
             MaterialButton(
               child: Text('Establecer Usuario', style: TextStyle(color: Colors.white),),
               color: Colors.blue,
-              onPressed: () {},
+              onPressed: () {
+                final newUser = new User(name: 'Alan', age: 40);
+                userService.setUser(newUser);
+              },
             ),
             MaterialButton(
               child: Text('Cambiar edad', style: TextStyle(color: Colors.white),),
               color: Colors.blue,
-              onPressed: () {},
+              onPressed: () {
+                if(!userService.isUserExists) return;
+                userService.setUserAge(20);
+              },
             ),
             MaterialButton(
               child: Text('Agregar Profesion', style: TextStyle(color: Colors.white),),
               color: Colors.blue,
-              onPressed: () {},
+              onPressed: () {
+                if(!userService.isUserExists) return;
+
+              },
             ),
           ],
         ),

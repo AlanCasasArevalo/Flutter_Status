@@ -23,9 +23,15 @@ class PageTwo extends StatelessWidget {
               onPressed: () {
                 final newUser = new User(
                   name: 'Alan',
-                  age: 40
+                  age: 40,
+                  professions: [
+                    'Node Developer',
+                    'iOS Developer',
+                    'Flutter Developer'
+                  ]
                 );
                 _userService.setUser = newUser;
+                Navigator.pop(context);
               },
             ),
             MaterialButton(
@@ -37,12 +43,16 @@ class PageTwo extends StatelessWidget {
                 } else {
                   return;
                 }
+                Navigator.pop(context);
               },
             ),
             MaterialButton(
               child: Text('Agregar Profesion', style: TextStyle(color: Colors.white),),
               color: Colors.blue,
-              onPressed: () {},
+              onPressed: () {
+                _userService.addProfessions();
+                Navigator.pop(context);
+              },
             ),
           ],
         ),

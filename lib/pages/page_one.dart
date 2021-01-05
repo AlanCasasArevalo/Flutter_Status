@@ -5,10 +5,8 @@ import 'package:status/models/user.dart';
 import 'package:status/services/user_service.dart';
 
 class PageOne extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-
     final _userService = Provider.of<UserService>(context);
 
     return Scaffold(
@@ -16,30 +14,29 @@ class PageOne extends StatelessWidget {
         title: Text('Pagina 1'),
         actions: [
           _userService.isUserExists
-              ?  IconButton(
-              icon: Icon(Icons.exit_to_app),
-              onPressed: () {
-                _userService.logout();
-              })
-              : IconButton(
-              icon: Icon(Icons.exit_to_app),
-              onPressed: null)
+              ? IconButton(
+                  icon: Icon(Icons.exit_to_app),
+                  onPressed: () {
+                    _userService.logout();
+                  })
+              : IconButton(icon: Icon(Icons.exit_to_app), onPressed: null)
         ],
       ),
       body: _userService.isUserExists
           ? UserInformation(_userService.user)
-          : Center(child: Text('No hay usuario seleccionado'),)
-      ,
+          : Center(
+              child: Text('No hay usuario seleccionado'),
+            ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.accessibility_new),
-        onPressed: () => Navigator.pushNamed(context, Constants.pageTwoRouteName),
+        onPressed: () =>
+            Navigator.pushNamed(context, Constants.pageTwoRouteName),
       ),
     );
   }
 }
 
 class UserInformation extends StatelessWidget {
-
   final User user;
 
   const UserInformation(this.user);
@@ -53,15 +50,25 @@ class UserInformation extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('General', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+          Text(
+            'General',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          ),
           Divider(),
-          ListTile(title: Text('Nombre: ${user.name}'),),
-          ListTile(title: Text('Edad: ${user.age}'),),
-          Text('Profesiones', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+          ListTile(
+            title: Text('Nombre: ${user.name}'),
+          ),
+          ListTile(
+            title: Text('Edad: ${user.age}'),
+          ),
+          Text(
+            'Profesiones',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          ),
           Divider(),
-          ListTile(title: Text('Profesion 1'),),
-          ListTile(title: Text('Profesion 2'),),
-          ListTile(title: Text('Profesion 3'),),
+          ...user.professions.map(
+                  (profession) => ListTile(title: Text(profession),)
+          ).toList()
         ],
       ),
     );

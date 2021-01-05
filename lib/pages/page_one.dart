@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:status/bloc/user/user_cubit.dart';
 import 'package:status/common/constants.dart';
+import 'package:status/models/user.dart';
 
 class PageOne extends StatelessWidget {
   @override
@@ -12,11 +13,12 @@ class PageOne extends StatelessWidget {
       ),
       body: BlocBuilder<UserCubit, UserState>(
         builder: (BuildContext context, state) {
-          print(state);
           if (state is UserInitialState) {
             return Center(child: Text('No hay informacion del usuario'),);
+          } else if (state is ActivatedUser) {
+            return UserInformation(state.user);
           } else {
-            return UserInformation();
+            return Center(child: Text('No hay inffffffoooo'),);
           }
         },
       ),
@@ -30,6 +32,11 @@ class PageOne extends StatelessWidget {
 }
 
 class UserInformation extends StatelessWidget {
+
+  final User user;
+
+  const UserInformation(this.user) : super();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,25 +52,17 @@ class UserInformation extends StatelessWidget {
           ),
           Divider(),
           ListTile(
-            title: Text('Nombre: '),
+            title: Text('Nombre: ${user.name}'),
           ),
           ListTile(
-            title: Text('Edad: '),
+            title: Text('Edad: ${user.age}'),
           ),
           Text(
             'Profesiones',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
           Divider(),
-          ListTile(
-            title: Text('Profesion 1'),
-          ),
-          ListTile(
-            title: Text('Profesion 2'),
-          ),
-          ListTile(
-            title: Text('Profesion 3'),
-          ),
+          ...user.professions.map((profession) => ListTile(title: Text(profession),)).toList()
         ],
       ),
     );

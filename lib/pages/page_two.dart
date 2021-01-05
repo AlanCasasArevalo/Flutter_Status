@@ -23,9 +23,15 @@ class PageTwo extends StatelessWidget {
               onPressed: () {
                 final newUser = new User(
                   name: 'Alan',
-                  age: 40
+                  age: 40,
+                  professions: [
+                    'iOS Developer',
+                    'Node Developer',
+                    'Flutter Developer'
+                  ]
                 );
                 _userCubit.selectedUser(newUser);
+                Navigator.pop(context);
               },
             ),
             MaterialButton(

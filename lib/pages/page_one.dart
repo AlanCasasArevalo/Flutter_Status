@@ -27,14 +27,6 @@ class BodyScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<UserCubit, UserState>(
       builder: (BuildContext context, state) {
-        // if (state is UserInitialState) {
-        //   return Center(child: Text('No hay informacion del usuario'),);
-        // } else if (state is ActivatedUser) {
-        //   return UserInformation(state.user);
-        // } else {
-        //   return Center(child: Text('No hay inffffffoooo'),);
-        // }
-
         switch (state.runtimeType) {
           case UserInitialState:
             return Center(child: Text('No hay informacion del usuario'),);

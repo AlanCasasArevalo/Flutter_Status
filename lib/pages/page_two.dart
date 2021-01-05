@@ -37,12 +37,18 @@ class PageTwo extends StatelessWidget {
             MaterialButton(
               child: Text('Cambiar edad', style: TextStyle(color: Colors.white),),
               color: Colors.blue,
-              onPressed: () {},
+              onPressed: () {
+                _userCubit.changeAge(20);
+                Navigator.pop(context);
+              },
             ),
             MaterialButton(
               child: Text('Agregar Profesion', style: TextStyle(color: Colors.white),),
               color: Colors.blue,
-              onPressed: () {},
+              onPressed: () {
+
+                Navigator.pop(context);
+              },
             ),
           ],
         ),

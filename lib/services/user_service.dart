@@ -4,7 +4,7 @@ import 'dart:async';
 class _UserService {
   User _user;
 
-  StreamController<User> _userStreamController = new StreamController<User>();
+  StreamController<User> _userStreamController = new StreamController<User>.broadcast();
 
   User get user => this._user;
   bool get isUserExists => (this._user != null) ? true : false;
@@ -19,6 +19,10 @@ class _UserService {
   void setUserAge(int age) {
     this._user.age = age;
     this._userStreamController.add(this._user);
+  }
+
+  dispose() {
+    _userStreamController?.close();
   }
 }
 

@@ -46,7 +46,7 @@ class PageTwo extends StatelessWidget {
               child: Text('Agregar Profesion', style: TextStyle(color: Colors.white),),
               color: Colors.blue,
               onPressed: () {
-
+                _userCubit.addProfession();
                 Navigator.pop(context);
               },
             ),

@@ -30,4 +30,8 @@ class UserCubit extends Cubit<UserState> {
       emit(ActivatedUser(newUser));
     }
   }
+
+  void logout () {
+    emit(UserInitialState());
+  }
 }

@@ -9,6 +9,15 @@ class PageOne extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          context.watch<UserCubit>().state is UserInitialState
+              ? IconButton(icon: Icon(Icons.exit_to_app), onPressed: null)
+              : IconButton(
+                  icon: Icon(Icons.exit_to_app),
+                  onPressed: () {
+                    context.read<UserCubit>().logout();
+                  })
+        ],
         title: Text('Pagina 1'),
       ),
       body: BodyScaffold(),
@@ -22,20 +31,23 @@ class PageOne extends StatelessWidget {
 }
 
 class BodyScaffold extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserCubit, UserState>(
       builder: (BuildContext context, state) {
         switch (state.runtimeType) {
           case UserInitialState:
-            return Center(child: Text('No hay informacion del usuario'),);
+            return Center(
+              child: Text('No hay informacion del usuario'),
+            );
             break;
           case ActivatedUser:
             return UserInformation((state as ActivatedUser).user);
             break;
           default:
-            return Center(child: Text('No hay informacion del usuario'),);
+            return Center(
+              child: Text('No hay informacion del usuario'),
+            );
         }
       },
     );
@@ -43,7 +55,6 @@ class BodyScaffold extends StatelessWidget {
 }
 
 class UserInformation extends StatelessWidget {
-
   final User user;
 
   const UserInformation(this.user) : super();
@@ -73,8 +84,11 @@ class UserInformation extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
           Divider(),
-          ...user.professions.map((profession) =>
-              ListTile(title: Text(profession),)).toList()
+          ...user.professions
+              .map((profession) => ListTile(
+                    title: Text(profession),
+                  ))
+              .toList()
         ],
       ),
     );

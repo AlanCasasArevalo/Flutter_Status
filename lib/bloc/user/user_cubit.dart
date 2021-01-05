@@ -22,8 +22,10 @@ class UserCubit extends Cubit<UserState> {
   void addProfession() {
     final currentState = state;
     if (currentState is ActivatedUser) {
-      final professions = currentState.user.professions;
-      professions.insert(professions.length, 'Profession ${professions.length+1}');
+      final professions = [
+        ...currentState.user.professions,
+        'Profession ${currentState.user.professions.length+1}'
+      ];
       final newUser = currentState.user.copyWith(professions: professions);
       emit(ActivatedUser(newUser));
     }

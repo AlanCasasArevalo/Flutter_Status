@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:status/common/constants.dart';
+import 'package:status/services/user_service.dart';
 
 class PageOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final _userService = Provider.of<UserService>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Pagina 1'),
       ),
-      body: UserInformation(),
+      body: _userService.isUserExists
+          ? UserInformation()
+          : Center(child: Text('No hay usuario seleccionado'),)
+      ,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.accessibility_new),
         onPressed: () => Navigator.pushNamed(context, Constants.pageTwoRouteName),

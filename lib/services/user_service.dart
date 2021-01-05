@@ -5,4 +5,9 @@ class UserService with ChangeNotifier {
   User _user;
   User get user => this._user;
   bool get isUserExists => (this._user != null) ? true : false;
+
+  set setUser(User user) {
+    this._user = user;
+    notifyListeners();
+  }
 }

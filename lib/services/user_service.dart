@@ -10,4 +10,15 @@ class UserService with ChangeNotifier {
     this._user = user;
     notifyListeners();
   }
+
+  void setAge(int age) {
+    this._user.age = age;
+    notifyListeners();
+  }
+
+  void logout() {
+    this._user = null;
+    notifyListeners();
+  }
+
 }

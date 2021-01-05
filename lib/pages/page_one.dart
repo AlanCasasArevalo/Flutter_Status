@@ -14,6 +14,17 @@ class PageOne extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Pagina 1'),
+        actions: [
+          _userService.isUserExists
+              ?  IconButton(
+              icon: Icon(Icons.exit_to_app),
+              onPressed: () {
+                _userService.logout();
+              })
+              : IconButton(
+              icon: Icon(Icons.exit_to_app),
+              onPressed: null)
+        ],
       ),
       body: _userService.isUserExists
           ? UserInformation(_userService.user)

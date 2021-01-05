@@ -11,22 +11,41 @@ class PageOne extends StatelessWidget {
       appBar: AppBar(
         title: Text('Pagina 1'),
       ),
-      body: BlocBuilder<UserCubit, UserState>(
-        builder: (BuildContext context, state) {
-          if (state is UserInitialState) {
-            return Center(child: Text('No hay informacion del usuario'),);
-          } else if (state is ActivatedUser) {
-            return UserInformation(state.user);
-          } else {
-            return Center(child: Text('No hay inffffffoooo'),);
-          }
-        },
-      ),
+      body: BodyScaffold(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.accessibility_new),
         onPressed: () =>
             Navigator.pushNamed(context, Constants.pageTwoRouteName),
       ),
+    );
+  }
+}
+
+class BodyScaffold extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<UserCubit, UserState>(
+      builder: (BuildContext context, state) {
+        // if (state is UserInitialState) {
+        //   return Center(child: Text('No hay informacion del usuario'),);
+        // } else if (state is ActivatedUser) {
+        //   return UserInformation(state.user);
+        // } else {
+        //   return Center(child: Text('No hay inffffffoooo'),);
+        // }
+
+        switch (state.runtimeType) {
+          case UserInitialState:
+            return Center(child: Text('No hay informacion del usuario'),);
+            break;
+          case ActivatedUser:
+            return UserInformation((state as ActivatedUser).user);
+            break;
+          default:
+            return Center(child: Text('No hay informacion del usuario'),);
+        }
+      },
     );
   }
 }
@@ -62,7 +81,8 @@ class UserInformation extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
           Divider(),
-          ...user.professions.map((profession) => ListTile(title: Text(profession),)).toList()
+          ...user.professions.map((profession) =>
+              ListTile(title: Text(profession),)).toList()
         ],
       ),
     );

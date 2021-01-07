@@ -8,3 +8,9 @@ class SetUserEvent extends UserEvents {
 
   SetUserEvent(this.user);
 }
+
+class ChangeUserAgeEvent extends UserEvents {
+  final int age;
+
+  ChangeUserAgeEvent(this.age);
+}

@@ -8,4 +8,14 @@ class User {
     this.age,
     this.professions,
   });
+
+  User copyWith({
+    String name,
+    int age,
+    List<String> professions
+  }) => User(
+    name: name ?? this.name ?? '',
+    age: age ?? this.age ?? 0,
+    professions: professions ?? this.professions ?? [],
+  );
 }

@@ -17,9 +17,10 @@ class UserBloc extends Bloc<UserEvents, UserState> {
     } else if (event is ChangeUserAgeEvent) {
       yield UserState(userPassed: state.user.copyWith(age: event.age));
     }else if (event is AddNewProfessionEvent) {
-      final professions = state.user.professions;
-      professions.insert(professions.length, event.profession);
-      yield UserState(userPassed: state.user.copyWith(professions: professions));
+      yield UserState(userPassed: state.user.copyWith(professions: [
+        ...state.user.professions,
+        event.profession
+      ]));
     }
   }
 }

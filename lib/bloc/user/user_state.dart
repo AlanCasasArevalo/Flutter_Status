@@ -5,4 +5,10 @@ class UserState {
 
   UserState({User userPassed}) : user = userPassed ?? null,
   isUserExists = (userPassed != null) ? true : false;
+
+  UserState copyWith ({User user}) => UserState(
+    userPassed: user ?? this.user
+  );
+
+  UserState initialState () => new UserState();
 }

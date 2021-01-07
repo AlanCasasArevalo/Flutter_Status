@@ -9,14 +9,24 @@ class PageOne extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+           IconButton(
+                  icon: Icon(Icons.exit_to_app),
+                  onPressed: () {
+                    BlocProvider.of<UserBloc>(context).add(LogoutEvent());
+                  })
+        ],
         title: Text('Pagina 1'),
       ),
       body: BlocBuilder<UserBloc, UserState>(
         builder: (BuildContext context, state) {
           if (state.isUserExists) {
-              return UserInformation(state.user);
+            return UserInformation(state.user);
           } else {
-            return Center(child: Container(child: Text('No hay usuario seleccionado'),));
+            return Center(
+                child: Container(
+              child: Text('No hay usuario seleccionado'),
+            ));
           }
         },
       ),
@@ -30,10 +40,9 @@ class PageOne extends StatelessWidget {
 }
 
 class UserInformation extends StatelessWidget {
-
   final User user;
 
-  const UserInformation( this.user);
+  const UserInformation(this.user);
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +69,11 @@ class UserInformation extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
           Divider(),
-          ...user.professions.map((profession) => ListTile(title: Text(profession),)).toList()
+          ...user.professions
+              .map((profession) => ListTile(
+                    title: Text(profession),
+                  ))
+              .toList()
         ],
       ),
     );

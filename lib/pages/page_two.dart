@@ -40,7 +40,9 @@ class PageTwo extends StatelessWidget {
               ),
               color: Colors.blue,
               onPressed: () {
-                userBloc.add(ChangeUserAgeEvent(90));
+                if (userBloc.state.isUserExists) {
+                  userBloc.add(ChangeUserAgeEvent(90));
+                }
                 Navigator.pop(context);
               },
             ),
@@ -51,9 +53,9 @@ class PageTwo extends StatelessWidget {
               ),
               color: Colors.blue,
               onPressed: () {
-                userBloc.add(
-                    AddNewProfessionEvent('Jugador de poker')
-                );
+                if (userBloc.state.isUserExists) {
+                  userBloc.add(AddNewProfessionEvent('Jugador de poker'));
+                }
                 Navigator.pop(context);
               },
             ),

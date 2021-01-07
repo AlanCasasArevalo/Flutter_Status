@@ -20,3 +20,6 @@ class AddNewProfessionEvent extends UserEvents {
 
   AddNewProfessionEvent(this.profession);
 }
+
+class LogoutEvent extends UserEvents {
+}
